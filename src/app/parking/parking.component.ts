@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common'
 export class ParkingComponent {
   parkingRecords: ParkingRecord[] = []
   formParking = new FormGroup({
-    plate: new FormControl('', Validators.required)
+    plate: new FormControl('', [Validators.required, Validators.minLength(4)])
   })
   addRecord() {
     this.parkingRecords = [...this.parkingRecords, { plate: this.formParking.value.plate ?? '', entryTime: new Date() }]

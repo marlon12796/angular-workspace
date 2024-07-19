@@ -1,8 +1,9 @@
 <div class="container">
+  <img ngSrc="scotiabank.png" alt="imagen" width="300" height="260" class="container__img" priority/>
   <h1 class="container__title">Lista de Atención</h1>
   <form class="form-group" [formGroup]="formAtention" (ngSubmit)="addCustomer()">
-    <input type="text" placeholder="Ingrese la placa del auto" class="form-control" formControlName="dni" />
-    <button type="submit" class="btn btn-primary form-group__button">
+    <input type="text" placeholder="Ingrese el DNI" class="form-control" formControlName="dni" />
+    <button type="submit" class="btn btn-primary form-group__button" [disabled]="!formAtention.valid">
       <span class="form-group_icon">
         <svg  viewBox="0 0 24 24" width="20" height="20">
           <path fill="none" d="M0 0h24v24H0z"></path>
@@ -12,4 +13,30 @@
       </span>
     </button>
   </form>
+  @if(customersBank.length>=1){
+    <table class="table">
+      <thead class="table__header">
+        <tr class="table__row">
+          <th class="table__header-cell">Id</th>
+          <th class="table__header-cell">Dni</th>
+          <th class="table__header-cell">Acción</th>
+        </tr>
+      </thead>
+      <tbody class="table__body">
+        @for (customerBank of customersBank; track customerBank.id) {
+        <tr class="table__row">
+          <td class="table__cell">{{ customerBank.id }}</td>
+          <td class="table__cell">{{ customerBank.dni}}</td>
+          <td class="table__cell">
+            <button type="button" (click)="removeCustomer(customerBank.dni)" class="btn btn-danger table__button">
+              Salir
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  }@else{
+    <p class="container__not-found">No hay clientes en espera</p>
+  }
 </div>

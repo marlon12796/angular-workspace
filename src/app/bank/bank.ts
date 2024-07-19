@@ -1,6 +1,4 @@
-import { type UUID } from 'crypto'
-
-export interface AtentionRecord {
+export interface CustomerBank {
   dni: string
-  id: UUID
+  id: number
 }

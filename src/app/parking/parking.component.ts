@@ -2,12 +2,12 @@ import { Component } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms'
 import { ParkingRecord } from './parking'
-import { DatePipe } from '@angular/common'
+import { DatePipe, NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-parking',
   standalone: true,
-  imports: [ReactiveFormsModule, DatePipe],
+  imports: [ReactiveFormsModule, DatePipe, NgOptimizedImage],
   templateUrl: './parking.component.html',
   styleUrl: './parking.component.css'
 })

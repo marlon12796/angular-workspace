@@ -1,25 +1,19 @@
 import { Component } from '@angular/core'
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { CustomerBank } from './bank'
 import { NgOptimizedImage } from '@angular/common'
+import { BankFormComponent } from '../bank-form/bank-form.component'
 @Component({
   selector: 'app-bank',
   standalone: true,
   templateUrl: './bank.component.html',
   styleUrl: './bank.component.css',
-  imports: [ReactiveFormsModule, NgOptimizedImage]
+  imports: [NgOptimizedImage, BankFormComponent]
 })
 export class BankComponent {
   customersBank: CustomerBank[] = []
-  formAtention = new FormGroup({
-    dni: new FormControl('', [Validators.required, Validators.pattern(/^\d{8}$/), Validators.minLength(8)])
-  })
-  addCustomer() {
-    this.customersBank = [
-      ...this.customersBank,
-      { dni: this.formAtention.value.dni ?? '', id: this.customersBank.length + 1 }
-    ]
-    this.formAtention.reset()
+
+  addCustomer({ dni }: Pick<CustomerBank, 'dni'>) {
+    this.customersBank = [...this.customersBank, { dni, id: this.customersBank.length + 1 }]
   }
   removeCustomer(dni: string) {
     this.customersBank = this.customersBank.filter((customer) => customer.dni !== dni)

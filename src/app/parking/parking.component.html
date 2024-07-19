@@ -2,18 +2,7 @@
 <div class="container">
   <img ngSrc="playa.jpg" alt="imagen" width="300" height="260" class="container__img" priority/>
   <h1 class="container__title">Playa de Estacionamiento</h1>
-  <form class="form-group" [formGroup]="formParking" (ngSubmit)="addRecord()" >
-    <input type="text" placeholder="Ingrese la placa del auto" class="form-control" formControlName="plate" />
-    <button type="submit" class="btn btn-primary form-group__button" [disabled]="!formParking.valid">
-      <span class="form-group_icon">
-        <svg viewBox="0 0 24 24" width="20" height="20">
-          <path fill="none" d="M0 0h24v24H0z"/>
-          <path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"/>
-        </svg>
-        Registrar
-      </span>
-    </button>
-  </form>
+  <app-parking-form (parkCarAddedEvent)="addRecord($event)"/>
   @if(parkingRecords.length>=1){
     <table class="table">
       <thead class="table__header">

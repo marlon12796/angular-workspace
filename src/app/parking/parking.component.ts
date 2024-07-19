@@ -1,24 +1,21 @@
 import { Component } from '@angular/core'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms'
 import { ParkingRecord } from './parking'
 import { DatePipe, NgOptimizedImage } from '@angular/common'
+import { ParkingFormComponent } from '../parking-form/parking-form.component'
 
 @Component({
   selector: 'app-parking',
   standalone: true,
-  imports: [ReactiveFormsModule, DatePipe, NgOptimizedImage],
+  imports: [ReactiveFormsModule, DatePipe, NgOptimizedImage, ParkingFormComponent],
   templateUrl: './parking.component.html',
   styleUrl: './parking.component.css'
 })
 export class ParkingComponent {
   parkingRecords: ParkingRecord[] = []
-  formParking = new FormGroup({
-    plate: new FormControl('', [Validators.required, Validators.minLength(4)])
-  })
-  addRecord() {
-    this.parkingRecords = [...this.parkingRecords, { plate: this.formParking.value.plate ?? '', entryTime: new Date() }]
-    this.formParking.reset()
+
+  addRecord(cardPark: ParkingRecord) {
+    this.parkingRecords = [...this.parkingRecords, cardPark]
   }
   removeRecord(plate: string) {
     this.parkingRecords = this.parkingRecords.filter((park) => park.plate !== plate)

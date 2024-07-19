@@ -1,18 +1,7 @@
 <div class="container">
   <img ngSrc="scotiabank.png" alt="imagen" width="300" height="260" class="container__img" priority/>
   <h1 class="container__title">Lista de Atención</h1>
-  <form class="form-group" [formGroup]="formAtention" (ngSubmit)="addCustomer()">
-    <input type="text" placeholder="Ingrese el DNI" class="form-control" formControlName="dni" />
-    <button type="submit" class="btn btn-primary form-group__button" [disabled]="!formAtention.valid">
-      <span class="form-group_icon">
-        <svg  viewBox="0 0 24 24" width="20" height="20">
-          <path fill="none" d="M0 0h24v24H0z"></path>
-          <path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path>
-        </svg>
-        Registrar
-      </span>
-    </button>
-  </form>
+  <app-bank-form (recordAddedEvent)="addCustomer($event)"/>
   @if(customersBank.length>=1){
     <table class="table">
       <thead class="table__header">
@@ -37,6 +26,6 @@
       </tbody>
     </table>
   }@else{
-    <p class="container__not-found">No hay clientes en espera</p>
+    <p class="container__not-found">No hay registros de atención</p>
   }
 </div>
